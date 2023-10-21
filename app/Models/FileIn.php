@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class In_File extends Model
+class FileIn extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'contractor_id',
         'file_number',

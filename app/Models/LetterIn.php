@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class In_Letter extends Model
+class LetterIn extends Model
 {
     use HasFactory;
 
@@ -50,4 +50,3 @@ class In_Letter extends Model
     }
         
 };
-

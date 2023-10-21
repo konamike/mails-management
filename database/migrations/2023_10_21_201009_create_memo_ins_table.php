@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('in__memos', function (Blueprint $table) {
+        Schema::create('memo_ins', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');   
             $table->string('file_number');  
@@ -35,12 +35,11 @@ return new class extends Migration
 
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('in__memos');
+        Schema::dropIfExists('memo_ins');
     }
 };

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Out_Memo extends Model
+class MemoOut extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,6 @@ class Out_Memo extends Model
         'out_date',
         'user_id',
         'in_memo_id',
-        'document_handling_id',
         'hand_carried',
         'from',
         'send_to',

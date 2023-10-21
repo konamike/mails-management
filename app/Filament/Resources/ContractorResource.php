@@ -20,7 +20,7 @@ class ContractorResource extends Resource
 {
     protected static ?string $model = Contractor::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-briefcase';
+    protected static ?string $navigationIcon = 'heroicon-s-building-storefront';
 
     public static function form(Form $form): Form
     {
