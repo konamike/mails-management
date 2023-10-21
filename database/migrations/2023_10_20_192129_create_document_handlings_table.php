@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('treated')->required();
             $table->date('date_treated')->required();
             $table->text('remarks')->nullable();
+            $table->string('processed_by')->required();// Engineers 
             $table->timestamps();
 
             $table->foreign('incoming_mail_id')->references('id')->on('incoming_mails');  

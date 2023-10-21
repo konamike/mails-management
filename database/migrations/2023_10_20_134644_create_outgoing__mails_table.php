@@ -20,10 +20,9 @@ return new class extends Migration
             $table->string('hand_carried')->nullable();
             $table->string('from')->required()->default('MD/CEO');
             $table->string('send_to')->required();
-            $table->string('processed_by')->required();
             $table->text('remarks')->nullable();
             $table->timestamps();
-
+            
             $table->foreign('incoming_mail_id')->references('id')->on('incoming_mails');              
             $table->foreign('document_handling')->references('id')->on('document_handlings');      
         });
