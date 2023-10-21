@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('in__files', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('contractor_id')->constrained()->cascadeOnDelete();
-                $table->string('file_number')->unique();
+                $table->string('file_number');
                 $table->unsignedBigInteger('category_id');           
                 $table->string('received_by');
                 $table->date('received_date');

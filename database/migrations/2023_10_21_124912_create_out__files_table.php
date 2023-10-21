@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('out__files', function (Blueprint $table) {
             $table->id();
+            $table->date('out_date');
+            $table->foreingId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('in_file_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('document_handling_id')->constrained->cascadeOnDelete();
+            $table->string('hand_carried')->nullable();
+            $table->string('from')->required()->default('MD/CEO');
+            $table->string('send_to')->required();
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }

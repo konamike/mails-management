@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('in__memos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contractor_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('category_id');   
             $table->string('file_number');  
             $table->string('received_by');
