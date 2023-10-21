@@ -29,7 +29,7 @@ class ContractorResource extends Resource
                 TextInput::make('name')->required(),
                 TextInput::make('contact person'),
                 TextInput::make('email')->email(),
-                TextInput::make('phone'),
+                TextInput::make('phone')->maxlength(11),
             ]);
     }
 
@@ -38,10 +38,15 @@ class ContractorResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('contact person'),
-                TextColumn::make('phone'),
+                TextColumn::make('name')
+                ->sortable()
+                ->searchable(),
+                TextColumn::make('email')
+                ->searchable(),
+                TextColumn::make('contact person')
+                ->searchable(),
+                TextColumn::make('phone')
+                ->searchable(),
             ])
             ->filters([
                 //
