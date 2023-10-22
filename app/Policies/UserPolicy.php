@@ -66,7 +66,7 @@ class UserPolicy
             /**
      * Determine whether the user can bulk delete the model.
      */
-    public function deleteAny(User $user, Contractor $contractor): bool
+    public function deleteAny(User $user): bool
     {
         return $user->is_Admin();
     }
