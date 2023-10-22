@@ -37,9 +37,10 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\SELECT::make('role')
+                Forms\Components\Select::make('role')
                 ->options(User::ROLES)
-                    ->required(),
+                    ->required()
+                    ->default('USER'),
             ]);
     }
 
@@ -76,14 +77,14 @@ class UserResource extends Resource
                 ]),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -91,5 +92,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
 }
