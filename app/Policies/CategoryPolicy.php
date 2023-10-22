@@ -63,4 +63,30 @@ class CategoryPolicy
     {
         return $user->is_Admin();
     }
+
+            /**
+     * Determine whether the user can bulk delete the model.
+     */
+    public function deleteAny(User $user): bool
+    {
+        return $user->is_Admin();
+    }
+
+    /**
+     * Determine whether the user can bulk restore the model.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->is_Admin();
+    }
+
+    /**
+     * Determine whether the user can bulk permanently delete the model.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->is_Admin();
+    }
 }
+
+
