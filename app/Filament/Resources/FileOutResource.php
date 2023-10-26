@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FileOutResource\Pages;
 use App\Filament\Resources\FileOutResource\RelationManagers;
+use App\Models\FileIn;
 use App\Models\FileOut;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,7 +19,7 @@ class FileOutResource extends Resource
 {
     protected static ?string $model = FileOut::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+    protected static ?string $navigationIcon = 'heroicon-s-briefcase';
 
     protected static ?string $navigationLabel = 'Outgoing Files';
 
@@ -29,27 +31,31 @@ class FileOutResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('file_in_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('file_in_id')
+                ->options(FileIn::all()->pluck('description','id'))
+                ->preload()
+                ->searchable()
+                ->label('File Name')
+                ->required()
+                ->columnSpanFull(),
+                Forms\Components\TextInput::make('from')
+                ->required()
+                ->maxLength(255)
+                ->default('MD/CEO'),
+                Forms\Components\TextInput::make('send_to')
+                ->required()
+                ->maxLength(255),
                 Forms\Components\DatePicker::make('out_date')
-                    ->required(),
+                ->date()
+                ->native()
+                ->displayFormat('d/m/Y'),  
                 Forms\Components\TextInput::make('hand_carried')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('from')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('MD/CEO'),
-                Forms\Components\TextInput::make('send_to')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('treated')
-                    ->required(),
-                Forms\Components\DatePicker::make('date_treated')
-                    ->required(),
+
+                // Forms\Components\Toggle::make('treated')
+                //     ->required(),
+                // Forms\Components\DatePicker::make('date_treated')
+                //     ->required(),
                 Forms\Components\TextInput::make('processed_by')
                     ->required()
                     ->maxLength(255),
@@ -70,19 +76,18 @@ class FileOutResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('out_date')
-                    ->date()
-                    ->sortable(),
+                    ->date(),
                 Tables\Columns\TextColumn::make('hand_carried')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('from')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('send_to')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('treated')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('date_treated')
-                    ->date()
-                    ->sortable(),
+                // Tables\Columns\IconColumn::make('treated')
+                //     ->boolean(),
+                // Tables\Columns\TextColumn::make('date_treated')
+                //     ->date()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('processed_by')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

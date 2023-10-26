@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\FileIn;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Contractor extends Model
 {
@@ -13,7 +15,12 @@ class Contractor extends Model
         'name',        
         'phone',
         'email',
-        'contact person',
+        'contact_person',
         'contact_phone',
     ];
+
+    public function filein(): HasOne
+    {
+        return $this->hasOne(fileIn::class);
+    }
 }

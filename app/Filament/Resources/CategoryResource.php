@@ -51,10 +51,10 @@ class CategoryResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('remarks')
-                    ->searchable(),
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->dateTime()
-                //     ->toggleable(isToggledHiddenByDefault: true),
+                ->wrap(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 // Tables\Columns\TextColumn::make('updated_at')
                 //     ->dateTime()
                 //     ->toggleable(isToggledHiddenByDefault: true),
@@ -63,6 +63,7 @@ class CategoryResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LetterIn extends Model
 {
@@ -22,8 +23,6 @@ class LetterIn extends Model
         'hand_carried',
         'retrieved_by',
         'retrieved_date',
-        'treated',
-        'treated_date',
         'remarks',
         'user_id',
     ];

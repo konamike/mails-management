@@ -9,4 +9,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMemoIn extends CreateRecord
 {
     protected static string $resource = MemoInResource::class;
+    protected function mutateFormDataBeforeCreate(array $data): array
+{
+    $data['user_id'] = auth()->id();
+
+    return $data;
+}
+
 }

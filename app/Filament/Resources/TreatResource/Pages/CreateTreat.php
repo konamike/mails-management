@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\LetterInResource\Pages;
+namespace App\Filament\Resources\TreatResource\Pages;
 
-use App\Filament\Resources\LetterInResource;
+use App\Filament\Resources\TreatResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateLetterIn extends CreateRecord
+class CreateTreat extends CreateRecord
 {
-    protected static string $resource = LetterInResource::class;
+    protected static string $resource = TreatResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array
 {

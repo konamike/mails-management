@@ -11,22 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('file_outs', function (Blueprint $table) {
+        Schema::create('treats', function (Blueprint $table) {
             $table->id();
-            $table->date('out_date');
-            $table->string('hand_carried')->nullable();
-            $table->string('from')->required()->default('MD/CEO');
-            $table->string('send_to')->required();
-            $table->date('date_treated')->required(); //Engineers
-            $table->string('processed_by')->required();// Engineers
-
+            $table->unsignedBigInteger('file_id');
+            $table->boolean('treated')->required(); 
+            $table->date('date_treated')->required(); 
             $table->text('remarks')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('file_in_id');
             $table->timestamps();            
  
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('file_in_id')->references('id')->on('file_ins');
+            $table->foreign('file_id')->references('id')->on('file_ins');
         });
     }
 
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('file_outs');
+        Schema::dropIfExists('treats');
     }
 };

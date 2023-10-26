@@ -17,7 +17,7 @@ class MemoInResource extends Resource
 {
     protected static ?string $model = MemoIn::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-inbox-stack';
 
     protected static ?string $navigationLabel = 'Incoming Memos';
 

@@ -27,7 +27,7 @@ class ContractorResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->required(),
-                TextInput::make('contact person'),
+                TextInput::make('contact_person'),
                 TextInput::make('email')->email(),
                 TextInput::make('phone')->maxlength(11),
             ]);
@@ -43,15 +43,18 @@ class ContractorResource extends Resource
                 ->searchable(),
                 TextColumn::make('email')
                 ->searchable(),
-                TextColumn::make('contact person')
+                TextColumn::make('contact_person')
+                ->label('Contact Person')
                 ->searchable(),
                 TextColumn::make('phone')
+                ->label('Phone No.')
                 ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

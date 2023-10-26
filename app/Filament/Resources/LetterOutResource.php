@@ -46,10 +46,10 @@ class LetterOutResource extends Resource
                 Forms\Components\TextInput::make('send_to')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Toggle::make('treated')
-                    ->required(),
-                Forms\Components\DatePicker::make('date_treated')
-                    ->required(),
+                // Forms\Components\Toggle::make('treated')
+                //     ->required(),
+                // Forms\Components\DatePicker::make('date_treated')
+                //     ->required(),
                 Forms\Components\TextInput::make('processed_by')
                     ->required()
                     ->maxLength(255),
@@ -78,11 +78,11 @@ class LetterOutResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('send_to')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('treated')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('date_treated')
-                    ->date()
-                    ->sortable(),
+                // Tables\Columns\IconColumn::make('treated')
+                //     ->boolean(),
+                // Tables\Columns\TextColumn::make('date_treated')
+                //     ->date()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('processed_by')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

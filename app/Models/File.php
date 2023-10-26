@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
-use App\Models\Contractor;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class FileIn extends Model
+class File extends Model
 {
     use HasFactory;
 
-    protected $table = 'File_Ins';
+
     protected $fillable = [
         'contractor_id',
         'file_number',
@@ -43,22 +40,4 @@ class FileIn extends Model
     {
         return $this->belongsTo(Contractor::class);
     }
-        
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    // public function filehandling(): HasOne
-    // {
-    //     return $this->hasOne(filehandling::class);
-    // }
-
-};
+}

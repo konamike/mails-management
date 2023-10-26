@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('document_originator')->nullable(); // For communities projects, the name of the location
             $table->string('document_sender')->nullable();  
             $table->string('phone', 11)->nullable(); 
-            $table->decimal('amount')->nullable();  
+            $table->decimal('amount',15,2)->nullable();  
             $table->text('description')->required();              
             $table->string('hand_carried')->nullable();
             $table->string('retrieved_by')->nullable();

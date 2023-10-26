@@ -20,14 +20,12 @@ return new class extends Migration
             $table->date('received_date');
             $table->string('document_author')->nullable(); // For communities projects, the name of the location
             $table->string('document_sender')->nullable();  
-            $table->decimal('amount')->nullable();  
+            $table->decimal('amount',15, 2)->nullable();  
             $table->text('description')->required();              
             $table->string('hand_carried')->nullable();
             $table->string('retrieved_by')->nullable();
             $table->date('retrieved_date')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->boolean('treated')->required();
-            $table->date('treated_date')->required();
             $table->text('remarks')->nullable();
             $table->timestamps();
 

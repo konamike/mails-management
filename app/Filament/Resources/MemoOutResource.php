@@ -17,7 +17,7 @@ class MemoOutResource extends Resource
 {
     protected static ?string $model = MemoOut::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-inbox-stack';
 
     protected static ?string $navigationLabel = 'Outgoing Memos';
 
