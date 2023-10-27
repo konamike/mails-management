@@ -16,17 +16,18 @@ class File extends Model
         'file_number',
         'category_id',        
         'received_by',
-        'received_date',
+        'date_received',
         'document_author',
         'document_sender',
         'amount',
         'description',
         'hand_carried',
         'retrieved_by',
-        'retrieved_date',
-        'user_id',
+        'date_retrieved',
         'treated',
-        'treated_date',
+        'date_treated',
+        'processed_by',
+        'user_id',
         'remarks',
     ];
     
@@ -40,4 +41,16 @@ class File extends Model
     {
         return $this->belongsTo(Contractor::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
+

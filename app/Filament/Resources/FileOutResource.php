@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FileOutResource\Pages;
-use App\Filament\Resources\FileOutResource\RelationManagers;
-use App\Models\FileIn;
-use App\Models\FileOut;
+use App\Filament\Resources\FileoutResource\Pages;
+use App\Filament\Resources\FileoutResource\RelationManagers;
+use App\Models\File;
+use App\Models\Fileout;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -15,9 +15,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class FileOutResource extends Resource
+class FileoutResource extends Resource
 {
-    protected static ?string $model = FileOut::class;
+    protected static ?string $model = Fileout::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-briefcase';
 
@@ -26,39 +26,26 @@ class FileOutResource extends Resource
     protected static ?string $navigationGroup = 'Outgoing Documents';
 
     protected static ?int $navigationSort = 1;
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('file_in_id')
-                ->options(FileIn::all()->pluck('description','id'))
+                Select::make('file_id')
+                ->options(File::all()->pluck('description','id'))
                 ->preload()
                 ->searchable()
                 ->label('File Name')
-                ->required()
-                ->columnSpanFull(),
+                ->required(),
+                // Forms\Components\TextInput::make('user_id')
+                //     ->required()
+                //     ->numeric(),
                 Forms\Components\TextInput::make('from')
-                ->required()
-                ->maxLength(255)
-                ->default('MD/CEO'),
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('send_to')
-                ->required()
-                ->maxLength(255),
-                Forms\Components\DatePicker::make('out_date')
-                ->date()
-                ->native()
-                ->displayFormat('d/m/Y'),  
-                Forms\Components\TextInput::make('hand_carried')
                     ->maxLength(255),
-
-                // Forms\Components\Toggle::make('treated')
-                //     ->required(),
-                // Forms\Components\DatePicker::make('date_treated')
-                //     ->required(),
-                Forms\Components\TextInput::make('processed_by')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\DatePicker::make('date_out')
+                    ->native(false)
+                    ->required(),
                 Forms\Components\Textarea::make('remarks')
                     ->maxLength(65535)
                     ->columnSpanFull(),
@@ -69,27 +56,20 @@ class FileOutResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('file.description')
+                    ->wrap()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('file_in_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('out_date')
-                    ->date(),
-                Tables\Columns\TextColumn::make('hand_carried')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('user.name')
+                //     ->numeric()
+                //     ->label('Created By')
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('from')
-                    ->searchable(),
+                    ->default('MD/CEO'),
                 Tables\Columns\TextColumn::make('send_to')
                     ->searchable(),
-                // Tables\Columns\IconColumn::make('treated')
-                //     ->boolean(),
-                // Tables\Columns\TextColumn::make('date_treated')
-                //     ->date()
-                //     ->sortable(),
-                Tables\Columns\TextColumn::make('processed_by')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('date_out')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -105,6 +85,7 @@ class FileOutResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -123,10 +104,10 @@ class FileOutResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFileOuts::route('/'),
-            'create' => Pages\CreateFileOut::route('/create'),
-            'view' => Pages\ViewFileOut::route('/{record}'),
-            'edit' => Pages\EditFileOut::route('/{record}/edit'),
+            'index' => Pages\ListFileouts::route('/'),
+            'create' => Pages\CreateFileout::route('/create'),
+            'view' => Pages\ViewFileout::route('/{record}'),
+            'edit' => Pages\EditFileout::route('/{record}/edit'),
         ];
     }    
 }

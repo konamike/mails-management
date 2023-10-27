@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('treats', function (Blueprint $table) {
+        Schema::create('fileouts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('file_id');
-            $table->boolean('treated')->required(); 
-            $table->date('date_treated')->required(); 
+            $table->string('from')->nullable();
+            $table->string('send_to')->nullable();
+            $table->date('date_out')->required();
             $table->text('remarks')->nullable();
+
+            $table->unsignedBigInteger('file_id');
             $table->unsignedBigInteger('user_id');
-            $table->timestamps();            
- 
+            $table->timestamps();
+
+            $table->foreign('file_id')->references('id')->on('files');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('file_id')->references('id')->on('file_ins');
         });
     }
 
@@ -30,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('treats');
+        Schema::dropIfExists('fileouts');
     }
 };
+

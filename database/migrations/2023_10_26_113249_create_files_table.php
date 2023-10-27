@@ -17,14 +17,19 @@ return new class extends Migration
             $table->string('file_number');
             $table->unsignedBigInteger('category_id');           
             $table->string('received_by');
-            $table->date('received_date');
+            $table->date('date_received');
             $table->string('document_author')->nullable(); // For communities projects, the name of the location
             $table->string('document_sender')->nullable();  
             $table->decimal('amount',15, 2)->nullable();  
             $table->text('description')->required();              
             $table->string('hand_carried')->nullable();
             $table->string('retrieved_by')->nullable();
-            $table->date('retrieved_date')->nullable();
+            $table->date('date_retrieved')->nullable();
+
+            $table->boolean('treated')->default(false); 
+            $table->date('date_treated')->nullable(); 
+            $table->string('processed_by')->nullable();// Engineer who treated the file
+
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('remarks')->nullable();
             $table->timestamps();
