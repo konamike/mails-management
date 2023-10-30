@@ -20,6 +20,16 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-tag';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'warning';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -45,7 +55,7 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('document_type')
                     ->sortable()
-                    ->label('Type of Document')
+                    ->label('Document Type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()

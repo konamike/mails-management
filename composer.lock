@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "667c3e65174dd37b5cac2e8656c757ae",
+    "content-hash": "ea45a6ccaf2af6547abc66fc6788aafe",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -3705,6 +3705,75 @@
             "time": "2023-08-13T19:53:39+00:00"
         },
         {
+            "name": "noxoua/filament-activity-log",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/noxoua/filament-activity-log.git",
+                "reference": "c5fb8fdda4c0d4dc9541ee5009ccc851d4a65133"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/noxoua/filament-activity-log/zipball/c5fb8fdda4c0d4dc9541ee5009ccc851d4a65133",
+                "reference": "c5fb8fdda4c0d4dc9541ee5009ccc851d4a65133",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "php": "^8.0",
+                "spatie/laravel-activitylog": "^4.7"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Noxo\\FilamentActivityLog\\FilamentActivityLogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Noxo\\FilamentActivityLog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Noxo",
+                    "email": "noxoua@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package that simplifies activity logging in the Filament admin panel, with support for logging create, update, delete, and restore actions. It integrates with the 'spatie/laravel-activitylog' package and includes a modernized activity log viewing page.",
+            "homepage": "https://github.com/noxoua/filament-activity-log",
+            "keywords": [
+                "activity log",
+                "filament",
+                "filament-activity-log",
+                "laravel",
+                "logging",
+                "noxoua",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/noxoua/filament-activity-log/issues",
+                "source": "https://github.com/noxoua/filament-activity-log"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/noxoua",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-10-28T14:40:53+00:00"
+        },
+        {
             "name": "nunomaduro/termwind",
             "version": "v1.15.1",
             "source": {
@@ -4833,6 +4902,97 @@
                 }
             ],
             "time": "2022-07-05T09:31:00+00:00"
+        },
+        {
+            "name": "spatie/laravel-activitylog",
+            "version": "4.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-activitylog.git",
+                "reference": "ec65a478a909b8df1b4f0c3c45de2592ca7639e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/ec65a478a909b8df1b4f0c3c45de2592ca7639e5",
+                "reference": "ec65a478a909b8df1b4f0c3c45de2592ca7639e5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^8.0 || ^9.0 || ^10.0",
+                "illuminate/database": "^8.69 || ^9.27 || ^10.0",
+                "illuminate/support": "^8.0 || ^9.0 || ^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.6.3"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "orchestra/testbench": "^6.23 || ^7.0 || ^8.0",
+                "pestphp/pest": "^1.20"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Activitylog\\ActivitylogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Activitylog\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tom Witkowski",
+                    "email": "dev.gummibeer@gmail.com",
+                    "homepage": "https://gummibeer.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A very simple activity logger to monitor the users of your website or application",
+            "homepage": "https://github.com/spatie/activitylog",
+            "keywords": [
+                "activity",
+                "laravel",
+                "log",
+                "spatie",
+                "user"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-activitylog/issues",
+                "source": "https://github.com/spatie/laravel-activitylog/tree/4.7.3"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-01-25T17:04:51+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",

@@ -26,6 +26,16 @@ class FileResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'warning';
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -48,6 +58,8 @@ class FileResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('date_received')
+                    ->native(false)
+                    ->maxDate(now())
                     ->required(),
                 Forms\Components\TextInput::make('document_author')
                     ->maxLength(255),
@@ -63,12 +75,9 @@ class FileResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('retrieved_by')
                     ->maxLength(255),
-                Forms\Components\DatePicker::make('date_retrieved'),
-                // Forms\Components\Toggle::make('treated')
-                //     ->required(),
-                // Forms\Components\DatePicker::make('date_treated'),
-                // Forms\Components\TextInput::make('processed_by')
-                //     ->maxLength(255),
+                Forms\Components\DatePicker::make('date_retrieved')
+                    ->native(false)
+                    ->maxDate(now()),
                 Forms\Components\Textarea::make('remarks')
                     ->maxLength(65535)
                     ->columnSpanFull(),
@@ -82,12 +91,6 @@ class FileResource extends Resource
                 Tables\Columns\TextColumn::make('contractor.name')
                     ->numeric()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('category_id')
-                //     ->numeric()
-                //     ->sortable(),
-                // Tables\Columns\TextColumn::make('user_id')
-                //     ->numeric()
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('file_number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('received_by')
@@ -109,13 +112,8 @@ class FileResource extends Resource
                 // Tables\Columns\TextColumn::make('date_retrieved')
                 //     ->date()
                 //     ->sortable(),
-                // Tables\Columns\IconColumn::make('treated')
-                //     ->boolean(),
-                // Tables\Columns\TextColumn::make('date_treated')
-                //     ->date()
-                //     ->sortable(),
-                // Tables\Columns\TextColumn::make('processed_by')
-                //     ->searchable(),
+                Tables\Columns\IconColumn::make('treated')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -138,6 +136,8 @@ class FileResource extends Resource
                 ]),
             ]);
     }
+
+    
     
     public static function getRelations(): array
     {
@@ -145,14 +145,16 @@ class FileResource extends Resource
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListFiles::route('/'),
             'create' => Pages\CreateFile::route('/create'),
-            'view' => Pages\ViewFile::route('/{record}'),
-            'edit' => Pages\EditFile::route('/{record}/edit'),
+            // 'view' => Pages\ViewFile::route('/{record}'),
+            // 'edit' => Pages\EditFile::route('/{record}/edit'),
         ];
-    }    
+    }   
+    
+    
 }

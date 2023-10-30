@@ -26,19 +26,26 @@ class FileoutResource extends Resource
     protected static ?string $navigationGroup = 'Outgoing Documents';
 
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'warning';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Select::make('file_id')
-                ->options(File::all()->pluck('description','id'))
+                ->options(File::where('treated', '=', '1')->pluck('description','id'))
                 ->preload()
                 ->searchable()
                 ->label('File Name')
                 ->required(),
-                // Forms\Components\TextInput::make('user_id')
-                //     ->required()
-                //     ->numeric(),
                 Forms\Components\TextInput::make('from')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('send_to')
@@ -56,19 +63,21 @@ class FileoutResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('file.date_received')
+                ->label('Date Received'),
+                Tables\Columns\TextColumn::make('file.file_number')
+                ->label('File Number'),
                 Tables\Columns\TextColumn::make('file.description')
+                    ->label('Document Name')
                     ->wrap()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('user.name')
-                //     ->numeric()
-                //     ->label('Created By')
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('from')
                     ->default('MD/CEO'),
                 Tables\Columns\TextColumn::make('send_to')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_out')
                     ->date()
+                    ->label('Date Sent')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

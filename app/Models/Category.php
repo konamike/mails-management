@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\FileIn;
+use App\Models\File;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -18,7 +19,7 @@ class Category extends Model
 
     public function filein(): HasMany
     {
-        return $this->hasMany(fileIn::class);
+        return $this->hasMany(file::class);
     }
         
 }

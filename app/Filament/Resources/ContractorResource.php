@@ -22,6 +22,19 @@ class ContractorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-building-storefront';
 
+    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'warning';
+    }
+
+
+
     public static function form(Form $form): Form
     {
         return $form
