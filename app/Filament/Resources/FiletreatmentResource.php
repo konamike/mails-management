@@ -22,7 +22,9 @@ class FiletreatmentResource extends Resource
 
     protected static ?string $navigationLabel = 'Processed Files';
 
-    protected static ?string $navigationGroup = 'Processed Documents';
+    protected static ?string $navigationGroup = 'Processing Documents';
+
+
 
     protected static ?int $navigationSort = 1;
     public static function getNavigationBadge(): ?string
