@@ -41,6 +41,11 @@ class FileResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Textarea::make('description')
+                ->label('File Description')
+                ->required()
+                ->maxLength(65535)
+                ->columnSpanFull(),
                 Forms\Components\Select::make('contractor_id')
                     ->relationship('contractor', 'name')
                     ->searchable()
@@ -67,10 +72,6 @@ class FileResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('amount')
                     ->numeric(),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('hand_carried')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('retrieved_by')
@@ -129,6 +130,7 @@ class FileResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

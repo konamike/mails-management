@@ -2,26 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\Category;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\FileOut;
 
-class CategoryPolicy
+class FileoutPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Create a new policy instance.
      */
+
     public function viewAny(User $user): bool
     {
-        return $user->is_Admin()  || $user->is_User();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Category $category): bool
+    public function view(User $user, Fileout $Fileout): bool
     {
-        return $user->is_Admin()|| $user->is_User();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
@@ -29,21 +29,21 @@ class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->is_Admin();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Category $category): bool
+    public function update(User $user, Fileout $Fileout): bool
     {
-        return $user->is_Admin();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Category $category): bool
+    public function delete(User $user, Fileout $Fileout): bool
     {
         return $user->is_Admin();
     }
@@ -51,7 +51,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Category $category): bool
+    public function restore(User $user, Fileout $Fileout): bool
     {
         return $user->is_Admin();
     }
@@ -59,12 +59,12 @@ class CategoryPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Category $category): bool
+    public function forceDelete(User $user): bool
     {
         return $user->is_Admin();
     }
 
-            /**
+        /**
      * Determine whether the user can bulk delete the model.
      */
     public function deleteAny(User $user): bool
@@ -88,5 +88,3 @@ class CategoryPolicy
         return $user->is_Admin();
     }
 }
-
-

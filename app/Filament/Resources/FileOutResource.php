@@ -65,14 +65,14 @@ class FileoutResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('file.date_received')
                 ->label('Date Received'),
-                Tables\Columns\TextColumn::make('file.file_number')
-                ->label('File Number'),
+                // Tables\Columns\TextColumn::make('file.file_number')
+                // ->label('File Number'),
                 Tables\Columns\TextColumn::make('file.description')
                     ->label('Document Name')
                     ->wrap()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('from')
-                    ->default('MD/CEO'),
+                // Tables\Columns\TextColumn::make('from')
+                //     ->default('MD/CEO'),
                 Tables\Columns\TextColumn::make('send_to')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_out')
@@ -114,9 +114,9 @@ class FileoutResource extends Resource
     {
         return [
             'index' => Pages\ListFileouts::route('/'),
-            'create' => Pages\CreateFileout::route('/create'),
-            'view' => Pages\ViewFileout::route('/{record}'),
-            'edit' => Pages\EditFileout::route('/{record}/edit'),
+            // 'create' => Pages\CreateFileout::route('/create'),
+            // 'view' => Pages\ViewFileout::route('/{record}'),
+            // 'edit' => Pages\EditFileout::route('/{record}/edit'),
         ];
     }    
 }

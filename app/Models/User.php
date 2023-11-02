@@ -57,7 +57,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_Admin() || $this->is_Engineer();
+        return $this->is_Admin() || $this->is_User() || $this->is_Engineer();
     }
 
     public function is_Admin()
@@ -68,6 +68,11 @@ class User extends Authenticatable implements FilamentUser
     public function is_Engineer()
     {
        return $this->role === self::ROLE_ENGINEER;
+    }
+
+    public function is_User()
+    {
+       return $this->role === self::ROLE_USER;
     }
 
 

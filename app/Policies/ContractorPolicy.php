@@ -13,7 +13,7 @@ class ContractorPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
@@ -21,7 +21,7 @@ class ContractorPolicy
      */
     public function view(User $user, Contractor $contractor): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
@@ -29,7 +29,7 @@ class ContractorPolicy
      */
     public function create(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**
@@ -37,7 +37,7 @@ class ContractorPolicy
      */
     public function update(User $user, Contractor $contractor): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User();
+        return $user->is_Admin() || $user->is_User();
     }
 
     /**

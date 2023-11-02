@@ -20,7 +20,7 @@ class FiletreatmentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationLabel = 'Processed Files';
+    protected static ?string $navigationLabel = 'Processing Files';
 
     protected static ?string $navigationGroup = 'Processing Documents';
 
@@ -46,6 +46,16 @@ class FiletreatmentResource extends Resource
     {
         return false;
     }
+
+
+    /**
+     * Summary of getEloquentQuery
+     * @return \Illuminate\Database\Eloquent\Builder
+     * Filter data based on treated documents     */
+    public static function getEloquentQuery(): Builder
+{
+    return static::getModel()::query()->where('treated',0);
+}
 
     public static function form(Form $form): Form
     {

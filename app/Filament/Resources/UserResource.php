@@ -40,6 +40,7 @@ class UserResource extends Resource
                 Forms\Components\Select::make('role')
                 ->options(User::ROLES)
                     ->required()
+                    ->native(false)
                     ->default('USER'),
             ]);
     }
