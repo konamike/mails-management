@@ -9,6 +9,11 @@ use Filament\Resources\Pages\EditRecord;
 class EditContractor extends EditRecord
 {
     protected static string $resource = ContractorResource::class;
+    protected static ?string $title = 'Edit Contractor';
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 
     protected function getHeaderActions(): array
     {

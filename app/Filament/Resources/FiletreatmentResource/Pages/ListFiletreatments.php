@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListFiletreatments extends ListRecords
 {
     protected static string $resource = FiletreatmentResource::class;
-
+    protected static ?string $title = 'Files To Be Treated';
     protected function getHeaderActions(): array
     {
         return [

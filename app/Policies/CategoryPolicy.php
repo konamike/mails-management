@@ -13,7 +13,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->is_Admin()  || $user->is_User();
+        return $user->is_Admin();
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category): bool
     {
-        return $user->is_Admin()|| $user->is_User();
+        return $user->is_Admin();
     }
 
     /**

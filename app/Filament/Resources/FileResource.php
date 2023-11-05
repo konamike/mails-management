@@ -19,10 +19,8 @@ class FileResource extends Resource
 
 
     protected static ?string $navigationIcon = 'heroicon-s-briefcase';
-
-    protected static ?string $navigationLabel = 'Incoming Files';
-
     protected static ?string $navigationGroup = 'Incoming Documents';
+    protected static ?string $navigationLabel = 'Files';
 
     protected static ?int $navigationSort = 1;
 
@@ -64,7 +62,6 @@ class FileResource extends Resource
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('date_received')
                     ->native(false)
-                    ->maxDate(now())
                     ->required(),
                 Forms\Components\TextInput::make('document_author')
                     ->maxLength(255),
@@ -77,8 +74,7 @@ class FileResource extends Resource
                 Forms\Components\TextInput::make('retrieved_by')
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('date_retrieved')
-                    ->native(false)
-                    ->maxDate(now()),
+                    ->native(false),
                 Forms\Components\Textarea::make('remarks')
                     ->maxLength(65535)
                     ->columnSpanFull(),
@@ -95,31 +91,17 @@ class FileResource extends Resource
                 Tables\Columns\TextColumn::make('file_number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('received_by')
+                    ->wrap('')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_received')
                     ->date()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('document_author')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('document_sender')
-                //     ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('hand_carried')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('retrieved_by')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('date_retrieved')
-                //     ->date()
-                //     ->sortable(),
                 Tables\Columns\IconColumn::make('treated')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -147,16 +129,19 @@ class FileResource extends Resource
             //
         ];
     }
+    
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListFiles::route('/'),
             'create' => Pages\CreateFile::route('/create'),
-            // 'view' => Pages\ViewFile::route('/{record}'),
-            // 'edit' => Pages\EditFile::route('/{record}/edit'),
+            'view' => Pages\ViewFile::route('/{record}'),
+            'edit' => Pages\EditFile::route('/{record}/edit'),
         ];
-    }   
+    }  
+    
+    
     
     
 }

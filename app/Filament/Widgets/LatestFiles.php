@@ -4,12 +4,14 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\FileResource;
 use App\Models\File;
+use App\Models\User;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestFiles extends BaseWidget
 {
+
 
     protected int | string | array $columnSpan = 'full';
     public function table(Table $table): Table

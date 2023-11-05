@@ -28,13 +28,15 @@ return new class extends Migration
 
             $table->boolean('treated')->default(false); 
             $table->date('date_treated')->nullable(); 
-            $table->string('processed_by')->nullable();// Engineer who treated the file
+            $table->unsignedBigInteger('treated_by')->nullable();// Engineer who treated the file
 
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained();
             $table->text('remarks')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('treated_by')->references('id')->on('users');
+
         });
     }
 

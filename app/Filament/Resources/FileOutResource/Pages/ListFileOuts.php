@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListFileouts extends ListRecords
 {
     protected static string $resource = FileoutResource::class;
+    protected static ?string $title = 'List of Outgoing Files';
 
     protected function getHeaderActions(): array
     {

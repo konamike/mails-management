@@ -32,17 +32,22 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->breadcrumbs(false)
             ->userMenuItems([
-                'profile' => MenuItem::make()->label('Edit profile'),
-                'logout' => MenuItem::make()->label('Log out')
+                // 'profile' => MenuItem::make()->label('Edit profile'),
+                // 'logout' => MenuItem::make()->label('Log out')
             ])
             //->registration()
             ->passwordReset()
             ->emailVerification()
             ->profile()
             ->colors([
-                'primary' => Color::Emerald,
+                'primary' => Color::Teal,
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'success' => Color::Lime,
+                'warning' => Color::Orange,
             ])
-            ->font('Poppins')
+            ->font('Merriweather')
             ->darkMode(true)
             ->brandName("Mails Management System")
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

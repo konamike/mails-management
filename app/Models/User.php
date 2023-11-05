@@ -23,12 +23,16 @@ class User extends Authenticatable implements FilamentUser
   
 
      const ROLE_ADMIN = 'ADMIN';
+     const ROLE_MD = 'MD'; //MD/CEO Role
+     const ROLE_CoS = 'CoS'; //Chief of Staff Role
      const ROLE_ENGINEER = 'ENGINEER';
      const ROLE_USER = 'USER';
 
 
      const ROLES = [
         self::ROLE_ADMIN => 'Admin' , 
+        self::ROLE_MD => 'MD' , 
+        self::ROLE_CoS => 'CoS',
         self::ROLE_ENGINEER => 'Engineer',
         self::ROLE_USER => 'User'
     ];
@@ -63,6 +67,14 @@ class User extends Authenticatable implements FilamentUser
     public function is_Admin()
     {
        return $this->role === self::ROLE_ADMIN;
+    }
+    public function is_MD()
+    {
+       return $this->role === self::ROLE_MD;
+    }
+    public function is_CoS()
+    {
+       return $this->role === self::ROLE_CoS;
     }
 
     public function is_Engineer()

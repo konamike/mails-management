@@ -19,24 +19,23 @@ class FiletreatmentResource extends Resource
     protected static ?string $model = Filetreatment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
-
-    protected static ?string $navigationLabel = 'Processing Files';
-
-    protected static ?string $navigationGroup = 'Processing Documents';
-
-
+    protected static ?string $navigationGroup = 'Under Process';
+    protected static ?string $navigationLabel = 'Files';
 
     protected static ?int $navigationSort = 1;
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::getModel()::where('treated', false)->count();
     }
 
     public static function getNavigationBadgeColor(): string|array|null
     {
         return 'warning';
     }
-
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::query()->where('treated', 0);
+    }
     public static function canCreate(): bool
     {
         return false;
@@ -52,10 +51,7 @@ class FiletreatmentResource extends Resource
      * Summary of getEloquentQuery
      * @return \Illuminate\Database\Eloquent\Builder
      * Filter data based on treated documents     */
-    public static function getEloquentQuery(): Builder
-{
-    return static::getModel()::query()->where('treated',0);
-}
+
 
     public static function form(Form $form): Form
     {
@@ -71,11 +67,13 @@ class FiletreatmentResource extends Resource
                 Forms\Components\Toggle::make('treated')
                     ->label('File Treated')
                     ->required(),
-                Forms\Components\Textarea::make('remarks')
+                Forms\Components\Textarea::make('notes')
+                    ->label('Document Note')
                     ->maxLength(65535)
                     ->columnSpanFull(),
             ])->columns(2);
     }
+    
 
     public static function table(Table $table): Table
     {
@@ -83,11 +81,13 @@ class FiletreatmentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('description')
                     ->label('Document Name')
+                    ->searchable()
                     ->wrap()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('contractor.name')
                     ->label("Contractor's Name")
+                    ->searchable()
                     ->wrap()
                     ->sortable(),
 
@@ -128,7 +128,7 @@ class FiletreatmentResource extends Resource
         return [
             'index' => Pages\ListFiletreatments::route('/'),
             // 'create' => Pages\CreateFiletreatment::route('/create'),
-            'edit' => Pages\EditFiletreatment::route('/{record}/edit'),
+            // 'edit' => Pages\EditFiletreatment::route('/{record}/edit'),
         ];
     }
 }

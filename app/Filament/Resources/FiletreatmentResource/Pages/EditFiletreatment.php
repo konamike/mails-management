@@ -10,10 +10,24 @@ class EditFiletreatment extends EditRecord
 {
     protected static string $resource = FiletreatmentResource::class;
 
+    protected static ?string $title = 'Edit File';
+
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave($data): array
+    {
+        $data['treated_by'] = auth()->id();
+    
+        return $data;
+    }
+
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('document_type')->before('name');
+            $table->string('document_type')->after('id');
         });
     }
 

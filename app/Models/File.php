@@ -26,8 +26,9 @@ class File extends Model
         'date_retrieved',
         'treated',
         'date_treated',
-        'processed_by',
+        'treated_by',
         'user_id',
+        'notes',
         'remarks',
     ];
     

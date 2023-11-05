@@ -20,11 +20,9 @@ class FileoutResource extends Resource
     protected static ?string $model = Fileout::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-briefcase';
-
-    protected static ?string $navigationLabel = 'Outgoing Files';
-
     protected static ?string $navigationGroup = 'Outgoing Documents';
 
+    protected static ?string $navigationLabel = 'Files';
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationBadge(): ?string
@@ -63,27 +61,18 @@ class FileoutResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('file.date_received')
-                ->label('Date Received'),
-                // Tables\Columns\TextColumn::make('file.file_number')
-                // ->label('File Number'),
-                Tables\Columns\TextColumn::make('file.description')
-                    ->label('Document Name')
-                    ->wrap()
-                    ->sortable(),
-                // Tables\Columns\TextColumn::make('from')
-                //     ->default('MD/CEO'),
-                Tables\Columns\TextColumn::make('send_to')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('date_out')
-                    ->date()
-                    ->label('Date Sent')
-                    ->sortable(),
+                ->label('Date Sent')
+                ->sortable(),
+                Tables\Columns\TextColumn::make('file.description')
+                    ->label('Description')
+                    ->wrap(),
+                Tables\Columns\TextColumn::make('file.contractor.email')
+                    ->label('Email'),
+                Tables\Columns\TextColumn::make('file.contractor.phone')
+                    ->label('Phone'),
+                Tables\Columns\TextColumn::make('send_to'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -117,6 +106,7 @@ class FileoutResource extends Resource
             // 'create' => Pages\CreateFileout::route('/create'),
             // 'view' => Pages\ViewFileout::route('/{record}'),
             // 'edit' => Pages\EditFileout::route('/{record}/edit'),
+            
         ];
     }    
 }
