@@ -10,14 +10,6 @@ class EditLetter extends EditRecord
 {
     protected static string $resource = LetterResource::class;
 
-    protected static ?string $title = 'Edit File';
-
-    protected function getRedirectUrl(): string
-{
-    return $this->getResource()::getUrl('index');
-}
-
-
     protected function getHeaderActions(): array
     {
         return [

@@ -21,6 +21,7 @@ class File extends Model
         'document_sender',
         'amount',
         'description',
+        'email',
         'hand_carried',
         'retrieved_by',
         'date_retrieved',
@@ -30,7 +31,16 @@ class File extends Model
         'user_id',
         'notes',
         'remarks',
+        'date_dispatched',
+        'sent_from',
+        'sent_to',
+        'dispatch_phone',
+        'dispatch_email',
+        'dispatched_by',
+        'dispatch_remarks',
+        'dispatched',
     ];
+
     
     protected $casts = [
         'received_date' => 'date',

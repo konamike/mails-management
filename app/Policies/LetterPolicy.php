@@ -12,7 +12,7 @@ class LetterPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User()|| $user->is_MD() || $user->is_CoS();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_User()|| $user->is_MD() || $user->is_CoS() || $user->is_HSD();
     }
 
     /**
@@ -20,7 +20,7 @@ class LetterPolicy
      */
     public function view(User $user, Letter $Letter): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User() || $user->is_MD() || $user->is_CoS();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_User() || $user->is_MD() || $user->is_CoS() || $user->is_HSD();
     }
 
     /**
@@ -36,7 +36,7 @@ class LetterPolicy
      */
     public function update(User $user, Letter $Letter): bool
     {
-        return $user->is_Admin() || $user->is_User() || $user->is_CoS();
+        return $user->is_Admin() || $user->is_User() ;
     }
 
     /**

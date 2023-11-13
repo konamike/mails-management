@@ -18,7 +18,7 @@ class LatestFiles extends BaseWidget
     {
         return $table
             ->query(FileResource::getEloquentQuery())
-            ->defaultPaginationPageOption(10)
+            ->defaultPaginationPageOption(5)
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
@@ -27,11 +27,13 @@ class LatestFiles extends BaseWidget
                 Tables\Columns\TextColumn::make('date_received')
                 ->label('Date Received')
                 ->date(),        
+                Tables\Columns\TextColumn::make('document_author')
+                ->label('Author')
+                ->searchable()
+                ->wrap(),
                 Tables\Columns\TextColumn::make('description')
                 ->searchable()
                 ->wrap(),
-            Tables\Columns\TextColumn::make('file_number')
-                ->searchable(),
             Tables\Columns\TextColumn::make('amount')
                 ->numeric(),
             Tables\Columns\IconColumn::make('treated')

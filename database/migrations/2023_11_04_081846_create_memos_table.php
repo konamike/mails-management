@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('contractor_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             $table->text('description')->required();
-            $table->decimal('amount',15, 2)->nullable();  
-            $table->string('phone')->nullable();
+            $table->decimal('amount',15, 2)->nullable();
+            $table->string('email')->nullable();
             $table->string('received_by')->nullable();
             $table->date('date_received')->nullable();
             $table->string('hand_carried')->nullable();

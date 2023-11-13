@@ -22,15 +22,15 @@ class ContractorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-building-storefront';
 
-    
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
     }
-    
+
     public static function getNavigationBadgeColor(): string|array|null
     {
-        return 'warning';
+        return 'success';
     }
 
 
@@ -77,14 +77,14 @@ class ContractorResource extends Resource
                 ]),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -92,5 +92,5 @@ class ContractorResource extends Resource
             'create' => Pages\CreateContractor::route('/create'),
             'edit' => Pages\EditContractor::route('/{record}/edit'),
         ];
-    }    
+    }
 }

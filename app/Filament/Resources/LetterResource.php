@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\LetterResource\Pages;
 use App\Filament\Resources\LetterResource\RelationManagers;
 use App\Models\Letter;
+use App\Models\Category;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,62 +18,67 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class LetterResource extends Resource
 {
     protected static ?string $model = Letter::class;
-    
+
     protected static ?string $navigationIcon = 'heroicon-s-briefcase';
-    protected static ?string $navigationGroup = 'Incoming Documents';
-    protected static ?string $navigationLabel = 'Letter';
+    protected static ?string $navigationGroup = 'All Documents';
+    protected static ?string $navigationLabel = 'Letters';
 
-
-
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
     }
-    
+
     public static function getNavigationBadgeColor(): string|array|null
     {
-        return 'warning';
+        return 'success';
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\Textarea::make('description')
+                    ->required()
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
                 Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->label('Category'),
-                Forms\Components\TextInput::make('file_number')
-                    ->maxLength(100),
+                    ->label('Category')
+                    ->options(Category::where('document_type', 'LETTER')->pluck('name', 'id'))
+                    ->preload()
+                    ->native(false)
+                    ->searchable(),
                 Forms\Components\TextInput::make('author')
                     ->label('Author/Sender')
                     ->maxLength(255),
                 Forms\Components\Select::make('contractor_id')
                     ->relationship('contractor', 'name')
-                    ->default(0)
-                    ->label('Contractor Name'),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
+                    ->default(1)
+                    ->label('Contractor Name')
+                    ->native(false),
+
+                Forms\Components\TextInput::make('file_number')
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('amount')
                     ->numeric(),
                 Forms\Components\TextInput::make('phone')
-                    ->string()
+                    ->minLength(11)
                     ->maxLength(11),
-                Forms\Components\TextInput::make('received_by')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('received_by')
+                    ->label('Received By')
+                    ->placeholder('Select the Receiver of the Memo')
+                    ->options(User::where('role', 'USER')->pluck('name', 'id'))
+                    ->preload()
+                    ->native(false)
+                    ->searchable(),
                 Forms\Components\DatePicker::make('date_received')
-                     ->required()
-                     ->native(false),
-                Forms\Components\TextInput::make('hand_carried')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('retrieved_by')
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('date_retrieved')
-                ->native(false),
+                    ->native(false)
+                    ->required(),
+//                Forms\Components\TextInput::make('hand_carried')
+//                    ->maxLength(255),
+//                Forms\Components\TextInput::make('retrieved_by')
+//                    ->maxLength(255),
                 Forms\Components\Textarea::make('remarks')
                     ->maxLength(65535)
                     ->columnSpanFull(),
@@ -83,43 +90,20 @@ class LetterResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label('Category')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->wrap()
-                    ->label('Document Title'),
-                // Tables\Columns\TextColumn::make('contractor.name')
-                //     ->numeric()
-                //     ->sortable(),
-                // Tables\Columns\TextColumn::make('treated_by')
-                //     ->numeric()
-                //     ->sortable(),
-                Tables\Columns\TextColumn::make('date_received')
-                    ->date()
-                    ->label('Date Received')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('author')
+                    ->label('Author/Sender')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('file_number')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('amount')
-                //     ->numeric()
-                //     ->sortable(),
-                Tables\Columns\TextColumn::make('phone')
+                Tables\Columns\TextColumn::make('description')
+                    ->wrap()
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('received_by')
-                //     ->searchable(),
-
-                // Tables\Columns\TextColumn::make('hand_carried')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('retrieved_by')
-                //     ->searchable(),
+                Tables\Columns\TextColumn::make('file_number')
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('treated')
                     ->boolean(),
-
-                // Tables\Columns\TextColumn::make('date_treated')
-                //     ->date()
-                //     ->sortable(),
+                Tables\Columns\IconColumn::make('dispatched')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -138,14 +122,14 @@ class LetterResource extends Resource
                 ]),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -154,5 +138,5 @@ class LetterResource extends Resource
             'view' => Pages\ViewLetter::route('/{record}'),
             'edit' => Pages\EditLetter::route('/{record}/edit'),
         ];
-    }    
+    }
 }

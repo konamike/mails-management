@@ -26,7 +26,7 @@ class FiletreatmentPolicy
      */
     public function create(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer();
+        return $user->is_Admin() || $user->is_Engineer()|| $user->is_CoS();
     }
 
     /**
@@ -34,7 +34,7 @@ class FiletreatmentPolicy
      */
     public function update(User $user, Filetreatment $Filetreatment): bool
     {
-        return $user->is_Admin() || $user->is_Engineer();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_CoS();
     }
 
     /**

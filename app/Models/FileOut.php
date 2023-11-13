@@ -21,6 +21,8 @@ class FileOut extends Model
         'user_id',
         'file_id',
         'remarks',
+        'phone',
+        'email',
     ];
 
 

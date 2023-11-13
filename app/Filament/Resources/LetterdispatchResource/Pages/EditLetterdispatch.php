@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Filament\Resources\FileResource\Pages;
+namespace App\Filament\Resources\LetterdispatchResource\Pages;
 
 use App\Filament\Resources\FileResource;
-use App\Mail\FileSentMail;
+use App\Filament\Resources\LetterdispatchResource;
 use App\Models\User;
-use Auth;
 use Filament\Actions;
-
-//use Filament\Actions\Action;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Support\Facades\Mail;
-use Filament\Notifications\Actions\Action;
 
-class EditFile extends EditRecord
+class EditLetterdispatch extends EditRecord
 {
-    protected static string $resource = FileResource::class;
-    protected static ?string $title = 'Edit File';
+    protected static string $resource = LetterdispatchResource::class;
+    protected static ?string $title = 'Process for Dispatch';
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
             Actions\DeleteAction::make(),
         ];
     }
@@ -34,7 +33,7 @@ class EditFile extends EditRecord
         return
             Notification::make()
                 ->success()
-                ->title('Changes to a file.')
+                ->title('A letter has been placed on dispatch.')
                 ->duration(4000)
                 ->body('The File: ' . $this->record->description . ' was updated by ' . $name)
                 ->actions([
@@ -42,13 +41,6 @@ class EditFile extends EditRecord
                         ->url(FileResource::getUrl('view', ['record' => $this->record]))
                         ->button(),
                 ])
-                ->sendToDatabase(User::whereIn('role', ['ADMIN', 'USER']));
+                ->sendToDatabase(User::whereIn('role', ['ADMIN', 'USER', 'MD'])->get());
     }
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
-    }
-
-
 }

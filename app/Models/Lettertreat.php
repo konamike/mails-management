@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Lettertreat extends Model
 {
     use HasFactory;
+
     protected $table = 'letters';
-    
+
     protected $fillable = [
         'date_received',
         'author',
@@ -30,12 +31,20 @@ class Lettertreat extends Model
         'treated_by',
         'user_id',
         'notes',
-        'remarks'
+        'remarks',
+        'date_dispatched',
+        'sent_from',
+        'sent_to',
+        'dispatch_phone',
+        'dispatch_email',
+        'dispatched_by',
+        'dispatch_remarks',
+        'dispatched',
     ];
 
     protected $casts = [
         'date_received' => 'date',
-        'date_retrieved' => 'date',
+        'date_dispatched' => 'date',
         'date_treated' => 'date',
     ];
 

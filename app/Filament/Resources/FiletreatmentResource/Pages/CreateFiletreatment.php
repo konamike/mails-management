@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFiletreatment extends CreateRecord
 {
     protected static string $resource = FiletreatmentResource::class;
-    
+    protected static bool $canCreateAnother = false;
+
 }

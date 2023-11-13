@@ -10,7 +10,8 @@ class LettertreatPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_CoS() ;
+
     }
 
     /**
@@ -19,6 +20,7 @@ class LettertreatPolicy
     public function view(User $user, Lettertreat $Lettertreat): bool
     {
         return $user->is_Admin() || $user->is_Engineer();
+
     }
 
     /**
@@ -26,7 +28,7 @@ class LettertreatPolicy
      */
     public function create(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer();
+        return $user->is_Admin() || $user->is_Engineer() ;
     }
 
     /**

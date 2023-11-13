@@ -32,8 +32,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->breadcrumbs(false)
             ->userMenuItems([
-                // 'profile' => MenuItem::make()->label('Edit profile'),
-                // 'logout' => MenuItem::make()->label('Log out')
+                 'profile' => MenuItem::make()->label('Edit profile'),
+                 'logout' => MenuItem::make()->label('Log out')
             ])
             //->registration()
             ->passwordReset()

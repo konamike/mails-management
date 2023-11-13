@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->string('file_number')->nullable();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('contractor_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
+            $table->foreignId('contractor_id')->default(1)->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             $table->text('description')->required();
-            $table->decimal('amount',15, 2)->nullable();  
+            $table->decimal('amount',15, 2)->nullable();
             $table->string('phone')->nullable();
             $table->string('received_by')->nullable();
             $table->date('date_received')->nullable();
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->date('date_retrieved')->nullable();
             $table->boolean('treated')->default(false);
             $table->date('date_treated')->nullable();
-            $table->unsignedBigInteger('treated_by')->nullable();     
+            $table->unsignedBigInteger('treated_by')->nullable();
             $table->text('notes')->nullable();
-            $table->text('remarks')->nullable();            
+            $table->text('remarks')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
 

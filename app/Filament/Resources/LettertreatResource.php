@@ -11,30 +11,62 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Webbingbrasil\FilamentAdvancedFilter\Filters\BooleanFilter;
+
 
 class LettertreatResource extends Resource
 {
     protected static ?string $model = Lettertreat::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
-    protected static ?string $navigationGroup = 'Under Process';
+    protected static ?string $navigationGroup = 'Being Processed';
     protected static ?string $navigationLabel = 'Letters';
+
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::where('treated', false)->count();
     }
-    public static function getEloquentQuery(): Builder
-    {
-        return static::getModel()::query()->where('treated', 0);
-    }
 
     public static function getNavigationBadgeColor(): string|array|null
     {
-        return 'warning';
+        return 'success';
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $cat = Category::query()
+            // You can use eloquent methods here
+            ->select('id')
+            ->whereNotIn('name', ['INVITATION', 'COURTESY VISIT'])
+            ->where('document_type', 'LETTER')
+            ->get();
+
+        $cat_cos = Category::query()
+            // You can use eloquent methods here
+            ->select('id')
+            ->whereIn('name', ['INVITATION', 'COURTESY VISIT'])
+            ->where('document_type', 'LETTER')
+            ->get();
+
+        if (Auth::user()->role === 'CoS') {
+            return Lettertreat::query()->where('treated', 0)
+                ->whereIn('id', $cat_cos);
+
+//            return static::getModel()::query()->where('treated', 0)
+//                ->whereIn('category_id', (Category::query()
+//                    ->select('id')
+//                    ->whereIn('name', ['INVITATION', 'APPRECIATION'])
+//                    ->get()));
+        } else {
+            return Lettertreat::query()->where('treated', 0)
+                ->whereIn('id', $cat);
+        }
     }
 
     public static function canCreate(): bool
@@ -42,19 +74,23 @@ class LettertreatResource extends Resource
         return false;
     }
 
-    public static function canDelete(Model $record): bool
-    {
-        return false;
-    }
+//    public static function canDelete(Model $record): bool
+//    {
+//        return false;
+//    }
 
 
+    /**
+     * Summary of getEloquentQuery
+     * @return \Illuminate\Database\Eloquent\Builder
+     * Filter data based on treated documents     */
 
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('author')
+                Forms\Components\TextInput::make('file_number')
                     ->disabled(),
                 Forms\Components\Textarea::make('description')
                     ->disabled(),
@@ -62,37 +98,47 @@ class LettertreatResource extends Resource
                     ->native(false)
                     ->required(),
                 Forms\Components\Toggle::make('treated')
-                    ->label('Treated Letter?')
+                    ->label('File Treated')
                     ->required(),
-                Forms\Components\Textarea::make('notes')
-                    ->label('Document Note')
+                Forms\Components\RichEditor::make('notes')
+                    ->label('Note for the MD')
                     ->maxLength(65535)
                     ->columnSpanFull(),
             ])->columns(2);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('author')
-                    ->label("Author/Sender's Name")
+                Tables\Columns\TextColumn::make('category.document_type')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('date_received')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Document Name')
                     ->searchable()
                     ->wrap()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Description')
+                Tables\Columns\TextColumn::make('contractor.name')
+                    ->label("Contractor's Name")
                     ->searchable()
                     ->wrap()
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('file_number')
                     ->searchable(),
+
+                Tables\Columns\TextColumn::make('amount')
+                    ->numeric()
+                    ->sortable(),
+
                 Tables\Columns\IconColumn::make('treated')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('date_received')
-                    ->date()
-                    ->sortable(),
+
             ])
             ->filters([
                 //
@@ -117,8 +163,8 @@ class LettertreatResource extends Resource
     {
         return [
             'index' => Pages\ListLettertreats::route('/'),
-            // 'create' => Pages\CreateLettertreat::route('/create'),
-            // 'edit' => Pages\EditLettertreat::route('/{record}/edit'),
+//             'create' => Pages\CreateLettertreat::route('/create'),
+            'edit' => Pages\EditLettertreat::route('/{record}/edit'),
         ];
     }
 }

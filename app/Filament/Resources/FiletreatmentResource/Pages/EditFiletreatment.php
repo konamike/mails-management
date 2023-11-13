@@ -5,6 +5,11 @@ namespace App\Filament\Resources\FiletreatmentResource\Pages;
 use App\Filament\Resources\FiletreatmentResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Notifications\Notification;
+use Auth;
+use App\Models\User;
+use Filament\Actions\Action;
+use Illuminate\Support\Facades\Mail;
 
 class EditFiletreatment extends EditRecord
 {
@@ -19,15 +24,15 @@ class EditFiletreatment extends EditRecord
         ];
     }
 
-    protected function mutateFormDataBeforeSave($data): array
-    {
-        $data['treated_by'] = auth()->id();
-    
-        return $data;
-    }
-
     protected function getRedirectUrl(): string
-{
-    return $this->getResource()::getUrl('index');
-}
+    {
+        $name = Auth::user()->name;
+        $storedDataDescription = $this->record->description;
+        Notification::make()
+            ->success()
+            ->title('The File: '. $storedDataDescription. ' was treated by '. $name)
+            ->sendToDatabase(User::whereIn('role', ['ADMIN','MD'])->get());
+
+        return $this->getResource()::getUrl('index');
+    }
 }

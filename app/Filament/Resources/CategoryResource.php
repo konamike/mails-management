@@ -20,16 +20,6 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-tag';
 
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-    
-    public static function getNavigationBadgeColor(): string|array|null
-    {
-        return 'warning';
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -40,7 +30,8 @@ class CategoryResource extends Resource
                     'LETTER' => 'LETTER',
                     'MEMO' => 'MEMO',
                 ])
-                ->required(),
+                ->required()
+                ->native(false),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),

@@ -12,17 +12,17 @@ use App\Models\Contractor;
 class Memo extends Model
 {
     use HasFactory;
-    
-    
+
+
     protected $fillable = [
         'author',
         'contractor_id',
         'file_number',
         'category_id',
         'description',
-        'amount',   
-        'phone',
-        'retrieved_by',     
+        'amount',
+        'email',
+        'retrieved_by',
         'date_retrieved',
         'date_received',
         'hand_carried',
@@ -34,8 +34,16 @@ class Memo extends Model
         'user_id',
         'notes',
         'remarks',
+        'date_dispatched',
+        'sent_from',
+        'sent_to',
+        'dispatch_phone',
+        'dispatch_email',
+        'dispatched_by',
+        'dispatch_remarks',
+        'dispatched',
     ];
-    
+
     protected $casts = [
         'date_received' => 'date',
         'date_retrieved' => 'date',

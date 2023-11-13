@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,7 +34,15 @@ class Letter extends Model
         'treated_by',
         'user_id',
         'notes',
-        'remarks'
+        'remarks',
+        'date_dispatched',
+        'sent_from',
+        'sent_to',
+        'dispatch_phone',
+        'dispatch_email',
+        'dispatched_by',
+        'dispatch_remarks',
+        'dispatched',
     ];
 
     protected $casts = [
@@ -41,6 +50,7 @@ class Letter extends Model
         'date_retrieved' => 'date',
         'date_treated' => 'date',
     ];
+
 
     public function contractor(): BelongsTo
     {

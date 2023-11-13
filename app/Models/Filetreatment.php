@@ -12,11 +12,11 @@ class Filetreatment extends Model
 
     protected $table = 'files';
 
-    
+
     protected $fillable = [
         'contractor_id',
         'file_number',
-        'category_id',        
+        'category_id',
         'received_by',
         'date_received',
         'document_author',
@@ -33,7 +33,7 @@ class Filetreatment extends Model
         'remarks',
         'notes',
     ];
-    
+
     protected $casts = [
         'received_date' => 'date',
         'retrieved_date' => 'date',
@@ -43,5 +43,10 @@ class Filetreatment extends Model
         public function contractor(): BelongsTo
         {
             return $this->belongsTo(Contractor::class);
+        }
+
+        public function category(): BelongsTo
+        {
+            return $this->belongsTo(Category::class);
         }
 }

@@ -14,11 +14,10 @@ class Memotreat extends Model
     protected $fillable = [
         'contractor_id',
         'file_number',
-        'category_id',        
+        'category_id',
         'received_by',
         'date_received',
-        'document_author',
-        'document_sender',
+        'author',
         'amount',
         'description',
         'hand_carried',
@@ -31,7 +30,7 @@ class Memotreat extends Model
         'notes',
         'remarks',
     ];
-    
+
     protected $casts = [
         'date_received' => 'date',
         'date_retrieved' => 'date',

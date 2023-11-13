@@ -12,7 +12,7 @@ class FilePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_User() || $user->is_MD() || $user->is_CoS() || $user->is_HSD();
     }
 
     /**
@@ -20,7 +20,7 @@ class FilePolicy
      */
     public function view(User $user, File $File): bool
     {
-        return $user->is_Admin() || $user->is_Engineer() || $user->is_User();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_User() || $user->is_MD() || $user->is_CoS() || $user->is_HSD();
     }
 
     /**
