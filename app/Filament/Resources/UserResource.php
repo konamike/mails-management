@@ -77,31 +77,31 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Action::make('changePassword')
-                    ->action(function (User $record, array $data): void {
-                        $record->update([
-                            'password' => ($data['new_password']),
-                        ]);
-                        Filament::notify('success', 'Password changed successfully.');
-                    })
-                    ->form([
-                        Forms\Components\TextInput::make('new_password')
-                            ->password()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->label('New Password')
-                            ->required()
-                            ->rule(Password::default()),
-                        Forms\Components\TextInput::make('new_password_confirmation')
-                            ->password()
-                            ->label('Confirm New Password')
-                            ->rule('required', fn($get) => !!$get('new_password'))
-                            ->same('new_password'),
-                    ])
-                    ->icon('heroicon-o-key'),
-                Action::make('deactivate')
-                    ->color('danger')
-                    ->icon('heroicon-o-trash')
-                    ->action(fn(User $record) => $record->delete()),
+//                Action::make('changePassword')
+//                    ->action(function (User $record, array $data): void {
+//                        $record->update([
+//                            'password' => ($data['new_password']),
+//                        ]);
+//                        Filament::notify('success', 'Password changed successfully.');
+//                    })
+//                    ->form([
+//                        Forms\Components\TextInput::make('new_password')
+//                            ->password()
+//                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+//                            ->label('New Password')
+//                            ->required()
+//                            ->rule(Password::default()),
+//                        Forms\Components\TextInput::make('new_password_confirmation')
+//                            ->password()
+//                            ->label('Confirm New Password')
+//                            ->rule('required', fn($get) => !!$get('new_password'))
+//                            ->same('new_password'),
+//                    ])
+//                    ->icon('heroicon-o-key'),
+//                Action::make('deactivate')
+//                    ->color('danger')
+//                    ->icon('heroicon-o-trash')
+//                    ->action(fn(User $record) => $record->delete()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
