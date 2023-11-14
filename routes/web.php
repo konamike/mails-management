@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-//    return view('welcome');
-    return view('/admin');
+    return view('welcome');
+//    return view('/admin');
 });
 
 //Routes for Mailing
