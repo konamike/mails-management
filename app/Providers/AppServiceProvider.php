@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Filedispatch;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Telescope\Telescope;
 
 class AppServiceProvider extends ServiceProvider
 {
