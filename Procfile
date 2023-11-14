@@ -1,3 +1,3 @@
-$ git init -b master
+echo "web: heroku-php-apache2 public/" > Procfile
 $ git add .
-$ git commit -m "Updates"
+$ git commit -m "Procfile for Heroku"
