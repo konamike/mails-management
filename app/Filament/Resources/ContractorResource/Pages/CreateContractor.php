@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\ContractorResource\Pages;
 
 use App\Filament\Resources\ContractorResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateContractor extends CreateRecord
@@ -16,4 +15,9 @@ class CreateContractor extends CreateRecord
 
     return $data;
 }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
