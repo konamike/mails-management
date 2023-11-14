@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Letter;
 use App\Models\User;
+use App\Models\Category;
 
 class LetterPolicy
 {
