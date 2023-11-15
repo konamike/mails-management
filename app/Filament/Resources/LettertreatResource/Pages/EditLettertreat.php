@@ -4,7 +4,10 @@ namespace App\Filament\Resources\LettertreatResource\Pages;
 
 use App\Filament\Resources\LettertreatResource;
 use App\Mail\FileSentMail;
+use App\Models\User;
+use Auth;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Mail;
@@ -30,5 +33,30 @@ class EditLettertreat extends EditRecord
 
         return $this->getResource()::getUrl('index');
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        if (User::where('role', 'CoS')) {
+            $data['dispatched'] = 1;
+            $data['dispatched_by'] = auth()->id();
+            $data['dispatch_email'] = Auth::user()->email;
+            $data['dispatch_remarks'] = 'Treated by Chief of Staff';
+            $data['dispatch_phone'] = '08030000000';
+            $data['date_dispatched'] = now();
+        }
+        return $data;
+    }
+
+/*    protected function getHeaderActions(): array
+    {
+        $actions = parent::getFormActions();
+
+        return [
+            Action::make('save')
+                ->label('Save changes')
+                ->action('save'),
+        ];
+    }*/
+
 }
 

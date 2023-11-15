@@ -28,6 +28,8 @@ class LettertreatResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::where('treated', false)->count();
@@ -38,46 +40,58 @@ class LettertreatResource extends Resource
         return 'success';
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        $cat = Category::query()
-            // You can use eloquent methods here
-            ->select('id')
-            ->whereNotIn('name', ['INVITATION', 'COURTESY VISIT'])
-            ->where('document_type', 'LETTER')
-            ->get();
 
-        $cat_cos = Category::query()
-            // You can use eloquent methods here
-            ->select('id')
-            ->whereIn('name', ['INVITATION', 'COURTESY VISIT'])
-            ->where('document_type', 'LETTER')
-            ->get();
+    // Filament::registerUserMenuItems([
+    //     'account' => UserMenuItem::make()->url(route('filament.pages.profile')),
+    // ]);
+    
+    // if (auth()->user()->hasRole('Admin')) {
+    //     Filament::registerUserMenuItems([
+    //         'credits' => UserMenuItem::make()->label('Credits')->icon('heroicon-o-phone-outgoing')->url(route('filament.pages.credits')),
+    //     ]);
+    // }
 
-        if (Auth::user()->role === 'CoS') {
-            return Lettertreat::query()->where('treated', 0)
-                ->whereIn('id', $cat_cos);
+    /*
+        public static function getEloquentQuery(): Builder
+        {
+            $cat = Category::query()
+                // You can use eloquent methods here
+                ->select('id')
+                ->whereNotIn('name', ['INVITATION', 'COURTESY VISIT'])
+                ->where('document_type', 'LETTER')
+                ->get();
 
-//            return static::getModel()::query()->where('treated', 0)
-//                ->whereIn('category_id', (Category::query()
-//                    ->select('id')
-//                    ->whereIn('name', ['INVITATION', 'APPRECIATION'])
-//                    ->get()));
-        } else {
-            return Lettertreat::query()->where('treated', 0)
-                ->whereIn('id', $cat);
-        }
-    }
+            $cat_cos = Category::query()
+                // You can use eloquent methods here
+                ->select('id')
+                ->whereIn('name', ['INVITATION', 'COURTESY VISIT'])
+                ->where('document_type', 'LETTER')
+                ->get();
+
+            if (Auth::user()->role === 'CoS') {
+                return Lettertreat::query()->where('treated', 0)
+                    ->whereIn('id', $cat_cos);
+
+    //            return static::getModel()::query()->where('treated', 0)
+    //                ->whereIn('category_id', (Category::query()
+    //                    ->select('id')
+    //                    ->whereIn('name', ['INVITATION', 'APPRECIATION'])
+    //                    ->get()));
+            } else {
+                return Lettertreat::query()->where('treated', 0)
+                    ->whereIn('id', $cat);
+            }
+        }*/
 
     public static function canCreate(): bool
     {
         return false;
     }
 
-//    public static function canDelete(Model $record): bool
-//    {
-//        return false;
-//    }
+    // public static function canDelete(Model $record): bool
+    // {
+    //     return false;
+    // }
 
 
     /**
@@ -100,7 +114,7 @@ class LettertreatResource extends Resource
                 Forms\Components\Toggle::make('treated')
                     ->label('File Treated')
                     ->required(),
-                Forms\Components\RichEditor::make('notes')
+                Forms\Components\Textarea::make('notes')
                     ->label('Note for the MD')
                     ->maxLength(65535)
                     ->columnSpanFull(),

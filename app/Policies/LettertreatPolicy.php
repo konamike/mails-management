@@ -36,7 +36,7 @@ class LettertreatPolicy
      */
     public function update(User $user, Lettertreat $Lettertreat): bool
     {
-        return $user->is_Admin() || $user->is_Engineer();
+        return $user->is_Admin() || $user->is_Engineer() || $user->is_CoS();
     }
 
     /**

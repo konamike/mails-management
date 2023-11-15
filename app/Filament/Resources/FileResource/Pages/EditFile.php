@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\FileResource\Pages;
 
 use App\Filament\Resources\FileResource;
-use App\Mail\FileSentMail;
 use App\Models\User;
 use Auth;
 use Filament\Actions;
