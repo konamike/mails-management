@@ -8,9 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,7 +20,10 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var array<int, string>
      */
-
+    public function getFilamentName(): string
+    {
+        return "{$this->name}";
+    }
 
     const ROLE_ADMIN = 'ADMIN'; //Administrator
     const ROLE_MD = 'MD'; //MD/CEO Role
@@ -62,6 +66,17 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->is_Admin() || $this->is_User() || $this->is_Engineer() || $this->is_CoS() || $this->is_MD() || $this->is_HSD();
     }
+
+    // public function canAccessPanel(Panel $panel): bool  {
+    //     if ($panel->getId() === 'admin') {
+    //         return   $this->user()->role('ADMIN');
+    //     }
+    //     if ($panel->getId() === 'engr') {
+    //         return $this->user()->role('ENGR');
+    //     }
+    //     return true;
+ 
+    // }
 
 
     public function is_Admin()

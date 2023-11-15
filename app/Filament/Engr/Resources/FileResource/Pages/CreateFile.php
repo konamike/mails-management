@@ -9,4 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFile extends CreateRecord
 {
     protected static string $resource = FileResource::class;
+
+    protected static bool $canCreateAnother = false;
 }
+
+

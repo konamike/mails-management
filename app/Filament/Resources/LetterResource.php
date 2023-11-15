@@ -22,6 +22,7 @@ class LetterResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-briefcase';
     protected static ?string $navigationGroup = 'All Documents';
     protected static ?string $navigationLabel = 'Letters';
+    // protected static ?string $modelLabel = 'cliente';
 
     protected static ?int $navigationSort = 1;
 

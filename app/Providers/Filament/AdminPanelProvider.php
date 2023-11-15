@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Pages\Auth\EditProfile;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -31,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->databaseNotificationsPolling('30s')
             ->login()
             ->breadcrumbs(false)
+            ->maxContentWidth('full')
             ->userMenuItems([
                  'profile' => MenuItem::make()->label('Edit profile'),
                  'logout' => MenuItem::make()->label('Log out')
@@ -38,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             //->registration()
             ->passwordReset()
             ->emailVerification()
-            ->profile()
+            ->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::Teal,
                 'danger' => Color::Rose,

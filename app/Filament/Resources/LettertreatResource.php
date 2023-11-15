@@ -26,6 +26,8 @@ class LettertreatResource extends Resource
     protected static ?string $navigationGroup = 'Being Processed';
     protected static ?string $navigationLabel = 'Letters';
 
+    protected static ?string $modelLabel = 'Letter Processed';
+
     protected static ?int $navigationSort = 2;
 
     

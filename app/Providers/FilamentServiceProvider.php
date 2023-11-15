@@ -8,6 +8,7 @@ use Filament\Facades\Filament;
 use Filament\Navigation\NavigationItem;
 use App\Models\Filetreatment;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FilamentServiceProvider extends ServiceProvider
 {
@@ -24,18 +25,21 @@ class FilamentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Filament::serving(function () {
-            Filament::registerNavigationItems([
-                NavigationItem::make('Awaiting Signing')
-                    // ->url(route('filament.admin.resources.filetreatments.edit')
-                    ->icon('heroicon-o-presentation-chart-line')
-                    ->activeIcon('heroicon-s-presentation-chart-line')
-                    ->group('Awaiting MD')
-                    ->visible(fn (NavigationItem $item) => User::where('role', 'CoS')->first())
-                    // ->visible(fn(): bool => User::ROLE_CoS))
+    //     if(Auth::user()->role === "CoS") {
+
+    //     Filament::serving(function () {
+    //         Filament::registerNavigationItems([
+    //             NavigationItem::make('Awaiting Signing')
+    //                 // ->url(route('filament.admin.resources.filetreatments.edit')
+    //                 ->icon('heroicon-o-presentation-chart-line')
+    //                 ->activeIcon('heroicon-s-presentation-chart-line')
+    //                 ->group('Awaiting MD Sign')
+    //                 // ->visible(fn (NavigationItem $item) => User::where('role', '=', 'CoS'))
+    //                 // ->visible(fn(): bool => User::ROLE_CoS))
                     
-                    ->sort(3),
-            ]);
-        });
+    //                 ->sort(3),
+    //         ]);
+    //     });
+    // }
     }
 }

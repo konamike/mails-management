@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\MenuItem;
+use App\Filament\Pages\Auth\EditProfile;
 
 class EngrPanelProvider extends PanelProvider
 {
@@ -36,18 +37,17 @@ class EngrPanelProvider extends PanelProvider
             ])
             ->passwordReset()
             ->emailVerification()
-            ->profile()
+            ->profile(EditProfile::class)
             ->colors([
-                'primary' => Color::Teal,
+                'primary' => Color::Amber,
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
-                'info' => Color::Blue,
+                'info' => Color::Indigo,
                 'success' => Color::Lime,
                 'warning' => Color::Orange,
             ])
             ->darkMode(true)
             ->brandName("Mails Management System")
-            ->maxContentWidth('full')
             ->discoverResources(in: app_path('Filament/Engr/Resources'), for: 'App\\Filament\\Engr\\Resources')
             ->discoverPages(in: app_path('Filament/Engr/Pages'), for: 'App\\Filament\\Engr\\Pages')
             ->pages([
